@@ -20,6 +20,7 @@ import org.rspeer.runetek.api.scene.Players;
 import org.rspeer.runetek.providers.RSGrandExchangeOffer;
 import org.rspeer.script.Script;
 import org.rspeer.script.ScriptMeta;
+import org.rspeer.script.events.breaking.BreakEvent;
 import org.rspeer.ui.Log;
 
 import java.util.Arrays;
@@ -35,10 +36,11 @@ public class MagicHighAlch extends Script {
     private static boolean speed = false;
     private static int PARENT_INDEX = 218;
     private static int CHILD_INDEX = 38;
+    private static final int GEPARENT = 465;
     private final String ACTION = "Cast";
     private String runeName = "Nature rune";
     private int runePrice = 212;
-    private int presetPrice = 9000;
+    private int presetPrice = 9006;
     private int noToBuy =0;
     private String items[] = {"Onyx bolts (e)","Air battlestaff"};//"Onyx bolts (e)",
     private int highAlchValue = 9300;
@@ -48,6 +50,8 @@ public class MagicHighAlch extends Script {
     private int i=0;
     private RSGrandExchangeOffer emptySlot;
     private boolean setup = false;
+    private boolean buying = false;
+    private String buyingItem = "";
 
 
     private Set<String> itemSet = new HashSet<>();
@@ -76,25 +80,30 @@ public class MagicHighAlch extends Script {
     }
     @Override
     public int loop() {
-//        me = Players.getLocal();
-//        if(me==null)
-//            return 500;
-//        if(!setup)
-//            return setGE();
-//        if(!Inventory.contains(items)){
-//            return buyStaff(items);
-//        }
-//        if(!Inventory.contains(runeName)){
-//            return buyStaff(runeName);
-//        }
+        me = Players.getLocal();
+        if(me==null)
+            return 500;
+        if(!setup)
+            return setGE();
+        if(!Inventory.contains(items)&&!buying){
+            return buyStaff(items[1]);
+        }
+        if(!Inventory.contains(runeName)&&!buying){
+            return buyStaff(runeName);
+        }
         Log.info("Loop");
-//
-        if (!Inventory.contains("Nature rune"))
-            return -1;
-        else if(Inventory.contains("Nature rune"))
+        if( buying)
+            return buyingState();
+        else {
+
+            if (!Inventory.contains("Nature rune") && !buying)
+                return -1;
+            if (!Inventory.contains(items) && !buying)
+                return -1;
+            else if (Inventory.contains("Nature rune"))
                 return enchantAll();
 
-
+        }
 
         return 500;
     }
@@ -115,15 +124,18 @@ public class MagicHighAlch extends Script {
             Time.sleep(1000,2000);
             runePrice = GrandExchangeSetup.getPricePerItem();
             Time.sleep(500,1000);
-            InterfaceComponent closeComponent = Interfaces.getComponent(465,2,11);
+            InterfaceComponent closeComponent = Interfaces.getComponent(GEPARENT,2,11);
             closeComponent.click();
             Time.sleep(300,700);
-
+            if (!Tabs.isOpen(Tab.MAGIC))
+                Tabs.open(Tab.MAGIC);
+            Time.sleep(300,700);
                 return 300;
         }
         return 300;
     }
     public int buyStaff( String name){
+        BreakEvent.setCondition();
         Npc geClerk = Npcs.getNearest("Grand Exchange Clerk");
         geClerk.interact("Exchange");
         Time.sleep(500,1000);
@@ -149,12 +161,15 @@ public class MagicHighAlch extends Script {
                     Time.sleep(400,600);
                     GrandExchangeSetup.confirm();
                     Time.sleep(400,600);
+                    buyingItem=name;
                 }
             }
             else{
                 int profit = highAlchValue-presetPrice-5-runePrice;
-                if (profit<0)
+                if (profit<0) {
+                    Log.info("Negative Profit stopping");
                     return -1;
+                }
                 else {
                     priceToBuy = presetPrice + Random.nextInt(2, 5);
                     GrandExchangeSetup.setPrice(priceToBuy);
@@ -169,21 +184,17 @@ public class MagicHighAlch extends Script {
 
                 GrandExchangeSetup.setQuantity(noToBuy);
                 GrandExchangeSetup.confirm();
+                buying=true;
+                buyingItem=name;
             }
             if(noToBuy!=0) {
-                Time.sleepUntil(() -> emptySlot.getProgress() == RSGrandExchangeOffer.Progress.FINISHED, 300, 30000);
-                Time.sleep(300, 500);
-                Log.info("get prog "+emptySlot.getState());
-                Log.info("get prog "+RSGrandExchangeOffer.Progress.FINISHED);
-//
-//                if (emptySlot.getProgress() == RSGrandExchangeOffer.Progress.FINISHED) {
-//                    emptySlot.collect(RSGrandExchangeOffer.CollectionAction.NOTE);
-////                    emptySlot.collect(RSGrandExchangeOffer.CollectionAction.ITEM);
-//                }
-                emptySlot.collect(RSGrandExchangeOffer.CollectionAction.NOTE);
+/*
+Get progress doesn't work from here on.
+ */
+                buyingState();
 
             }
-            InterfaceComponent closeComponent = Interfaces.getComponent(465,2,11);
+            InterfaceComponent closeComponent = Interfaces.getComponent(GEPARENT,2,11);
             closeComponent.click();
             Time.sleep(300,700);
             if (!Tabs.isOpen(Tab.MAGIC))
@@ -192,16 +203,84 @@ public class MagicHighAlch extends Script {
         }
         return 0;
     }
+    public int buyingState(){
+//        Npc geClerk = Npcs.getNearest("Grand Exchange Clerk");
+//        geClerk.interact("Exchange");
+        Time.sleep(500,1000);
+        int priceToBuy = presetPrice;
+        if(!GrandExchange.isOpen()) {
+            GrandExchange.open();
+            Time.sleepUntil(()->GrandExchange.isOpen(),300,3000);
+            Time.sleep(400,600);
+        }
+        if (GrandExchange.isOpen()){
+        Time.sleep(300);
+        InterfaceComponent progressCheck=Interfaces.getComponent(GEPARENT,7,19);
+        for(i=7;i<16;i++){
+            Time.sleep(300);
+            progressCheck = Interfaces.getComponent(GEPARENT,i,19);
+            if(progressCheck.getText().equals(buyingItem)){
+                Log.info("retrieved state");
+                progressCheck = Interfaces.getComponent(GEPARENT,i,22);
+                break;
+            }
+            try {
+                Log.info(progressCheck.getText());
+            }catch(Exception e){
+                Log.info(e.toString());
+            }
+        }
+        if(i>15) {
+            Log.info("Stopping i>15");
+            return -1;
+        }
+        for(int t = 0;t<300;t++){
+            if(progressCheck.getTextColor() == doneColor) {
+                Log.info("progress = done");
+                break;
+            }
+            Time.sleep(300,400);
+        }
+        if(progressCheck.getTextColor() == doneColor){
+            Log.info("Collecting");
+            Interfaces.getComponent(GEPARENT,i,2).interact("View offer");
+            Log.info("viewing");
+            Time.sleep(300, 500);
+            Interfaces.getComponent(GEPARENT,23,2).click();
+            Log.info("collect1");
+            Time.sleep(300, 500);
+            Interfaces.getComponent(GEPARENT,23,3).click();
+            Log.info("collect2");
+            Time.sleep(300, 500);
+            buying=false;
+            Log.info("buying set to "+ buying);
+        }
+//                Time.sleepUntil(() -> (progressCheck.getTextColor() == doneColor), 300, 30000);
+        Time.sleep(300, 500);
+//
+//                Log.info("get prog "+emptySlot.getState());
+//                Log.info("get prog "+RSGrandExchangeOffer.Progress.FINISHED);
+//
+//                if (emptySlot.getProgress() == RSGrandExchangeOffer.Progress.FINISHED) {
+//                    emptySlot.collect(RSGrandExchangeOffer.CollectionAction.NOTE);
+////                    emptySlot.collect(RSGrandExchangeOffer.CollectionAction.ITEM);
+//                }
+//                emptySlot.collect(RSGrandExchangeOffer.CollectionAction.NOTE);
+
+    }
+    InterfaceComponent closeComponent = Interfaces.getComponent(GEPARENT,2,11);
+    return 300;
+    }
     public int buyStaff2(){
         Npc geClerk = Npcs.getNearest("Grand Exchange Clerk");
         geClerk.interact("Exchange");
         Time.sleep(500,1000);
-        InterfaceComponent geInterface = Interfaces.getComponent(465,7,16);
+        InterfaceComponent geInterface = Interfaces.getComponent(GEPARENT,7,16);
         InterfaceComponent subComponent;
 
         if(geInterface.isVisible()&&i==0){
             for(i=7;i<16;i++){
-                subComponent = Interfaces.getComponent(465,i,16);
+                subComponent = Interfaces.getComponent(GEPARENT,i,16);
                 try {
                     if (subComponent.getText().equals("Empty"))
                         break;
@@ -213,8 +292,8 @@ public class MagicHighAlch extends Script {
         if(i>15)
             return 300;
 
-        subComponent = Interfaces.getComponent(465,i,3);
-        subComponent.click();
+        subComponent = Interfaces.getComponent(GEPARENT,i,3);
+        subComponent.interact("Create");
         InterfaceComponent typeComponent = Interfaces.getComponent(162,45);
         if (typeComponent.isVisible()){
             Game.getClient().fireScriptEvent(96,"hello",0);
