@@ -135,7 +135,7 @@ public class MagicHighAlch extends Script {
         return 300;
     }
     public int buyStaff( String name){
-        BreakEvent.setCondition();
+//        BreakEvent.setCondition();
         Npc geClerk = Npcs.getNearest("Grand Exchange Clerk");
         geClerk.interact("Exchange");
         Time.sleep(500,1000);
