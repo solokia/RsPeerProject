@@ -83,6 +83,7 @@ public class MagicHighAlch extends Script {
         me = Players.getLocal();
         if(me==null)
             return 500;
+
         if(!setup)
             return setGE();
         if(!Inventory.contains(items)&&!buying){
@@ -108,12 +109,18 @@ public class MagicHighAlch extends Script {
         return 500;
     }
     public int setGE(){
+        Log.info("Setting up ");
+        Npc geClerk = Npcs.getNearest("Grand Exchange Clerk");
+        geClerk.interact("Exchange");
+        Time.sleep(500,1000);
         if(!GrandExchange.isOpen()) {
-            GrandExchange.open();
+            Log.info("Opening GE");
+            GrandExchange.open(); // doesn't work :/
             Time.sleepUntil(()->GrandExchange.isOpen(),300,3000);
             Time.sleep(400,600);
         }
         if (GrandExchange.isOpen()) {
+            Time.sleep(300,700);
             setup = true;
             emptySlot = GrandExchange.getFirstEmpty();
             if (emptySlot == null)
@@ -162,6 +169,7 @@ public class MagicHighAlch extends Script {
                     GrandExchangeSetup.confirm();
                     Time.sleep(400,600);
                     buyingItem=name;
+                    buying=true;
                 }
             }
             else{
@@ -207,7 +215,7 @@ Get progress doesn't work from here on.
 //        Npc geClerk = Npcs.getNearest("Grand Exchange Clerk");
 //        geClerk.interact("Exchange");
         Time.sleep(500,1000);
-        int priceToBuy = presetPrice;
+//        int priceToBuy = presetPrice;
         if(!GrandExchange.isOpen()) {
             GrandExchange.open();
             Time.sleepUntil(()->GrandExchange.isOpen(),300,3000);
@@ -240,6 +248,10 @@ Get progress doesn't work from here on.
                 break;
             }
             Time.sleep(300,400);
+            if(!progressCheck.isVisible()){
+                Log.info("can't see progress of buying");
+                return -1;
+            }
         }
         if(progressCheck.getTextColor() == doneColor){
             Log.info("Collecting");
