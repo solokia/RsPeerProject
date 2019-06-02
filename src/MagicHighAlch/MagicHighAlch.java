@@ -40,10 +40,10 @@ public class MagicHighAlch extends Script {
     private final String ACTION = "Cast";
     private String runeName = "Nature rune";
     private int runePrice = 212;
-    private int presetPrice = 9006;
-    private int noToBuy =0;
+    private int presetPrice = 9005;//9007,8695
+    private int noToBuy =100;
     private String items[] = {"Onyx bolts (e)","Air battlestaff"};//"Onyx bolts (e)",
-    private int highAlchValue = 9300;
+    private int highAlchValue = 9300;// 9300,9000
     private int ongoingColor = 14188576;
     private int doneColor = 24320;
     private int doneWidth = 105;
@@ -52,6 +52,7 @@ public class MagicHighAlch extends Script {
     private boolean setup = false;
     private boolean buying = false;
     private String buyingItem = "";
+    private int counter = 0;
 
 
     private Set<String> itemSet = new HashSet<>();
@@ -86,20 +87,21 @@ public class MagicHighAlch extends Script {
 
         if(!setup)
             return setGE();
-        if(!Inventory.contains(items)&&!buying){
+        if(!Inventory.contains(ipred)&&!buying){
+            Log.info(Inventory.contains(ipred));
             return buyStaff(items[1]);
         }
         if(!Inventory.contains(runeName)&&!buying){
             return buyStaff(runeName);
         }
-        Log.info("Loop");
+//        Log.info("Loop");
         if( buying)
             return buyingState();
         else {
 
             if (!Inventory.contains("Nature rune") && !buying)
                 return -1;
-            if (!Inventory.contains(items) && !buying)
+            if (!Inventory.contains(ipred) && !buying)
                 return -1;
             else if (Inventory.contains("Nature rune"))
                 return enchantAll();
@@ -202,18 +204,20 @@ Get progress doesn't work from here on.
                 buyingState();
 
             }
-            InterfaceComponent closeComponent = Interfaces.getComponent(GEPARENT,2,11);
-            closeComponent.click();
-            Time.sleep(300,700);
-            if (!Tabs.isOpen(Tab.MAGIC))
-                Tabs.open(Tab.MAGIC);
+            if(GrandExchange.isOpen()) {
+                InterfaceComponent closeComponent = Interfaces.getComponent(GEPARENT, 2, 11);
+                closeComponent.click();
+                Time.sleep(300, 700);
+                if (!Tabs.isOpen(Tab.MAGIC))
+                    Tabs.open(Tab.MAGIC);
+            }
             Time.sleep(300,700);
         }
         return 0;
     }
     public int buyingState(){
-//        Npc geClerk = Npcs.getNearest("Grand Exchange Clerk");
-//        geClerk.interact("Exchange");
+        Npc geClerk = Npcs.getNearest("Grand Exchange Clerk");
+        geClerk.interact("Exchange");
         Time.sleep(500,1000);
 //        int priceToBuy = presetPrice;
         if(!GrandExchange.isOpen()) {
@@ -222,53 +226,53 @@ Get progress doesn't work from here on.
             Time.sleep(400,600);
         }
         if (GrandExchange.isOpen()){
-        Time.sleep(300);
-        InterfaceComponent progressCheck=Interfaces.getComponent(GEPARENT,7,19);
-        for(i=7;i<16;i++){
             Time.sleep(300);
-            progressCheck = Interfaces.getComponent(GEPARENT,i,19);
-            if(progressCheck.getText().equals(buyingItem)){
-                Log.info("retrieved state");
-                progressCheck = Interfaces.getComponent(GEPARENT,i,22);
-                break;
+            InterfaceComponent progressCheck=Interfaces.getComponent(GEPARENT,7,19);
+            for(i=7;i<16;i++){
+                Time.sleep(300);
+                progressCheck = Interfaces.getComponent(GEPARENT,i,19);
+                if(progressCheck.getText().equals(buyingItem)){
+                    Log.info("retrieved state");
+                    progressCheck = Interfaces.getComponent(GEPARENT,i,22);
+                    break;
+                }
+                try {
+                    Log.info(progressCheck.getText());
+                }catch(Exception e){
+                    Log.info(e.toString());
+                }
             }
-            try {
-                Log.info(progressCheck.getText());
-            }catch(Exception e){
-                Log.info(e.toString());
-            }
-        }
-        if(i>15) {
-            Log.info("Stopping i>15");
-            return -1;
-        }
-        for(int t = 0;t<300;t++){
-            if(progressCheck.getTextColor() == doneColor) {
-                Log.info("progress = done");
-                break;
-            }
-            Time.sleep(300,400);
-            if(!progressCheck.isVisible()){
-                Log.info("can't see progress of buying");
+            if(i>15) {
+                Log.info("Stopping i>15");
                 return -1;
             }
-        }
-        if(progressCheck.getTextColor() == doneColor){
-            Log.info("Collecting");
-            Interfaces.getComponent(GEPARENT,i,2).interact("View offer");
-            Log.info("viewing");
+            for(int t = 0;t<300;t++){
+                if(progressCheck.getTextColor() == doneColor) {
+                    Log.info("progress = done");
+                    break;
+                }
+                Time.sleep(300,400);
+                if(!progressCheck.isVisible()){
+                    Log.info("can't see progress of buying");
+                    return -1;
+                }
+            }
+            if(progressCheck.getTextColor() == doneColor){
+                Log.info("Collecting");
+                Interfaces.getComponent(GEPARENT,i,2).interact("View offer");
+                Log.info("viewing");
+                Time.sleep(300, 500);
+                Interfaces.getComponent(GEPARENT,23,2).click();
+                Log.info("collect1");
+                Time.sleep(300, 500);
+                Interfaces.getComponent(GEPARENT,23,3).click();
+                Log.info("collect2");
+                Time.sleep(300, 500);
+                buying=false;
+                Log.info("buying set to "+ buying);
+            }
+    //                Time.sleepUntil(() -> (progressCheck.getTextColor() == doneColor), 300, 30000);
             Time.sleep(300, 500);
-            Interfaces.getComponent(GEPARENT,23,2).click();
-            Log.info("collect1");
-            Time.sleep(300, 500);
-            Interfaces.getComponent(GEPARENT,23,3).click();
-            Log.info("collect2");
-            Time.sleep(300, 500);
-            buying=false;
-            Log.info("buying set to "+ buying);
-        }
-//                Time.sleepUntil(() -> (progressCheck.getTextColor() == doneColor), 300, 30000);
-        Time.sleep(300, 500);
 //
 //                Log.info("get prog "+emptySlot.getState());
 //                Log.info("get prog "+RSGrandExchangeOffer.Progress.FINISHED);
@@ -279,9 +283,16 @@ Get progress doesn't work from here on.
 //                }
 //                emptySlot.collect(RSGrandExchangeOffer.CollectionAction.NOTE);
 
-    }
-    InterfaceComponent closeComponent = Interfaces.getComponent(GEPARENT,2,11);
-    return 300;
+        }
+        if(GrandExchange.isOpen()) {
+            InterfaceComponent closeComponent = Interfaces.getComponent(GEPARENT, 2, 11);
+            closeComponent.click();
+            Time.sleep(300, 700);
+            if (!Tabs.isOpen(Tab.MAGIC))
+                Tabs.open(Tab.MAGIC);
+        }
+        Time.sleep(300,700);
+        return 300;
     }
     public int buyStaff2(){
         Npc geClerk = Npcs.getNearest("Grand Exchange Clerk");
@@ -307,25 +318,44 @@ Get progress doesn't work from here on.
         subComponent = Interfaces.getComponent(GEPARENT,i,3);
         subComponent.interact("Create");
         InterfaceComponent typeComponent = Interfaces.getComponent(162,45);
-        if (typeComponent.isVisible()){
-            Game.getClient().fireScriptEvent(96,"hello",0);
-        }
+//        if (typeComponent.isVisible()){
+//            Game.getClient().fireScriptEvent(96,"hello",0);
+//        }
 
         return 300;
     }
 
     public int enchantAll(){
-        Log.info("Enter enchantAll");
+//        Log.info("Enter enchantAll");
 
         try {
+            if(GrandExchange.isOpen()){
+                InterfaceComponent closeComponent = Interfaces.getComponent(GEPARENT,2,11);
+                closeComponent.click();
+                Time.sleep(300,700);
+                if (!Tabs.isOpen(Tab.MAGIC))
+                    Tabs.open(Tab.MAGIC);
+                Time.sleep(300,700);
+            }
+
 //            Log.info(PARENT_INDEX + " " + CHILD_INDEX);
             Item[] noteList = null;
             noteList = Inventory.getItems(ipred);
             if(noteList.length==0)
                 return -1;
             InterfaceComponent wornEquipment = Interfaces.getComponent(PARENT_INDEX, CHILD_INDEX);
+            if(!wornEquipment.isVisible()){
+                counter++;
+            }
+            if(counter>15){
+                if (!Tabs.isOpen(Tab.MAGIC))
+                    Tabs.open(Tab.MAGIC);
+                Time.sleep(300,700);
+                counter= 0;
+                return 300;
+            }
             if (wornEquipment.isVisible()) {
-                Log.info("enter interface");
+//                Log.info("enter interface");
                 Time.sleep(300, 400);
                 wornEquipment.interact("");
 
@@ -343,7 +373,7 @@ Get progress doesn't work from here on.
 //        Time.sleep(200);
 //        Time.sleep(1000,1500);
         }catch (Exception e){
-            Log.severe(e);
+            Log.severe("Enchant error "+e);
             return -1;
         }
         return 500;

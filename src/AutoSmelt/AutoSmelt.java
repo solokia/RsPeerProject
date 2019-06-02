@@ -24,8 +24,8 @@ import org.rspeer.ui.Log;
 @ScriptMeta(developer = "Solly", desc = "AutoSmelt", name = "AutoSmelt")
 public class AutoSmelt extends Script {
     private Player me;
-    private Area bankArea =Area.surrounding(BankLocation.getNearest().getPosition(),3);
-    private Area smeltArea =Area.surrounding(new Position(3274,3186),2) ;
+    private Area bankArea =Area.surrounding(new Position(3096,3494),3);//BankLocation.getNearest().getPosition()
+    private Area smeltArea =Area.surrounding(new Position(3109,3499),2) ;//new Position(3274,3186)
     private String itemName="Gold bracelet",materialName="Gold bar";
     private boolean clicked = false;
     @Override
@@ -105,7 +105,7 @@ public class AutoSmelt extends Script {
         Time.sleep(300,2000);
     }
     public void walkToBank(){
-        Movement.walkTo(BankLocation.getNearest().getPosition());
+        Movement.walkTo(new Position(3096,3494));//BankLocation.getNearest().getPosition()
         Time.sleep(300,2000);
     }
     public boolean selectSmelt(){
