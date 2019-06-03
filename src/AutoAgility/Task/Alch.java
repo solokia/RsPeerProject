@@ -17,6 +17,8 @@ import java.util.function.Predicate;
 public class Alch extends Task {
     private Player me;
     private int counter=0;
+    private Climb climb = new Climb();
+    private Walk walk = new Walk();
     private Predicate<Item> ipred= item->{
         if(item.isNoted())
             return item.isNoted();
@@ -39,6 +41,18 @@ public class Alch extends Task {
     @Override
     public int execute() {
         Log.info("alch execute");
+        if(Random.nextInt(1,100)>80){
+            //not sure if allowed to do this
+            //random 20%chance to not alch but move on with course
+            Log.info("Skipping alch");
+
+            if(climb.validate())
+                climb.execute();
+            else if(walk.validate())
+                walk.execute();
+            Time.sleep(300,400);
+            return 300;
+        }
         Item[] noteList ;
         noteList = Inventory.getItems(ipred); // check was done before entering function.
         Item item = Inventory.getFirst(noteList[0].getName());

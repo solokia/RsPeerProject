@@ -18,7 +18,7 @@ import org.rspeer.ui.Log;
 
 public class Walk extends Task {
     private Player me;
-    private Task alch = new Alch() ;
+//    private Task alch = new Alch() ;
     @Override
     public boolean validate() {
 
@@ -54,7 +54,7 @@ public class Walk extends Task {
             Movement.walkTo(runTo);
         else{
             SceneObject courseStart = SceneObjects.getNearest(Config.getCourse().get(0).getObstacleName());
-            Log.info(courseStart.getActions().toString());
+//            Log.info(courseStart.getActions().toString());
             courseStart.interact(courseStart.getActions()[0]);
         }
         Time.sleep(400,700);

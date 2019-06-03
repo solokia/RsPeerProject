@@ -32,7 +32,7 @@ public class Climb extends Task {
         else
             return false;
     };
-    private Task alch = new Alch() ;
+//    private Task alch = new Alch() ;
     @Override
     public boolean validate() {
 
@@ -41,7 +41,7 @@ public class Climb extends Task {
 
         return Config.isConfigured()
                 &&me.getFloorLevel()>0
-                && !me.isMoving()
+//                && !me.isMoving()
                 && (!me.isAnimating()||me.getAnimation()==713);
     }
 

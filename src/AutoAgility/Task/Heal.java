@@ -59,7 +59,7 @@ public class Heal extends Task {
             Time.sleepUntil(()->(currentHp<Skills.getCurrentLevel(Skill.HITPOINTS)),300,Random.nextInt(2000,3000));
             Log.info("sleeping after eat"+Skills.getCurrentLevel(Skill.HITPOINTS));
         }catch(Exception e){
-            Log.severe(e);
+            Log.severe(e.toString());
         }
 
         return Random.nextInt(500,700);
