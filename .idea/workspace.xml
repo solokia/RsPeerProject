@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ef719ae-bf9e-4e6a-909e-dfe68248b81b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/AutoAgility/Task/Alch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AutoAgility/Task/Alch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AutoAgility/Task/Climb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AutoAgility/Task/Climb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AutoAgility/Task/Heal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AutoAgility/Task/Heal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AutoAgility/Task/Walk.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AutoAgility/Task/Walk.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -75,11 +72,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AutoAgility/Task/Climb.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="25" lean-forward="true" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+            <state relative-caret-position="340">
+              <caret line="71" column="36" lean-forward="true" selection-start-line="71" selection-start-column="36" selection-end-line="71" selection-end-column="36" />
               <folding>
-                <element signature="e#4352#4353#0" expanded="true" />
-                <element signature="e#4441#4442#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#4393#4394#0" expanded="true" />
+                <element signature="e#4482#4483#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -669,11 +667,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AutoAgility/Task/Climb.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="25" lean-forward="true" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+        <state relative-caret-position="340">
+          <caret line="71" column="36" lean-forward="true" selection-start-line="71" selection-start-column="36" selection-end-line="71" selection-end-column="36" />
           <folding>
-            <element signature="e#4352#4353#0" expanded="true" />
-            <element signature="e#4441#4442#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#4393#4394#0" expanded="true" />
+            <element signature="e#4482#4483#0" expanded="true" />
           </folding>
         </state>
       </provider>

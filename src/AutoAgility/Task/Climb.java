@@ -74,6 +74,7 @@ public class Climb extends Task {
 
                     mark.interact("Take");
                     Time.sleepUntil(()->!me.isMoving(),300,3000);
+                    Time.sleep(300,400);
                     try {
                         Item invMark = Inventory.getFirst("Mark of grace"); // not sure null or error
                         if (markCount < invMark.getStackSize())
