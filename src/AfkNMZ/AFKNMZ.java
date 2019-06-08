@@ -74,7 +74,10 @@ public class AFKNMZ extends Script {
                     try {
                         absPot = Inventory.getFirst(itemPredicate);
                         absPot.interact("Drink");
-                        Time.sleep(500,1000);
+                        if(absCount==0)
+                            Time.sleep(1000);
+                        else
+                            Time.sleep(400,800);
                         absPotInterface = Interfaces.getComponent(PARENT_INDEX, CHILD_INDEX, SUB_INDEX);
                         absCount = Integer.parseInt(absPotInterface.getText());
                         Log.info("absorption count "+absCount);
