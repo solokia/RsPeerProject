@@ -3,24 +3,30 @@ package AfkNMZ;
 import org.rspeer.runetek.adapter.component.InterfaceComponent;
 import org.rspeer.runetek.adapter.component.Item;
 import org.rspeer.runetek.adapter.scene.Player;
+import org.rspeer.runetek.api.Login;
 import org.rspeer.runetek.api.commons.Time;
 import org.rspeer.runetek.api.commons.math.Random;
 import org.rspeer.runetek.api.component.Interfaces;
+import org.rspeer.runetek.api.component.tab.Combat;
 import org.rspeer.runetek.api.component.tab.Inventory;
 import org.rspeer.runetek.api.component.tab.Skill;
 import org.rspeer.runetek.api.component.tab.Skills;
 import org.rspeer.runetek.api.movement.position.Area;
 import org.rspeer.runetek.api.scene.Players;
+import org.rspeer.runetek.event.listeners.RenderListener;
+import org.rspeer.runetek.event.types.RenderEvent;
 import org.rspeer.script.Script;
 import org.rspeer.script.ScriptMeta;
+import org.rspeer.script.events.LoginScreen;
 import org.rspeer.ui.Log;
 
 
+import java.awt.*;
 import java.util.function.Predicate;
 
 @ScriptMeta(developer = "Solly", desc = "AFK", name = "AfkNMZ")
 
-public class AFKNMZ extends Script {
+public class AFKNMZ extends Script implements RenderListener {
     private final int PARENT_INDEX = 202;
     private final int CHILD_INDEX = 3;
     private final int SUB_INDEX = 5;
@@ -28,6 +34,7 @@ public class AFKNMZ extends Script {
     private int absCount =0;
     private Item rockCake;
     private Player me;
+    private static String potName = "Overload";
     private static Predicate<Item> itemPredicate = item -> {
         if(item.getName().contains("Absorption"))
             return item.getName().contains("Absorption");
@@ -35,24 +42,45 @@ public class AFKNMZ extends Script {
             return false;
     };
     private static Predicate<Item> itemPredicate2 = item -> {
-        if(item.getName().contains("Super ranging"))
-            return item.getName().contains("Super ranging");
+        if(item.getName().contains(potName))
+            return item.getName().contains(potName);
         else
             return false;
     };
     private Area startArea = Area.rectangular(2598, 3121, 2610, 3109);
     private boolean loopStop =false;
+    private Skill selectedSkill = Skill.DEFENCE;
+    private int startSkillExp;
+    private int currentSkillExp;
+    private long startTime;
+    private long currentTime;
+    private double expDiff=0;
+    private String time = "";
+    private String expPerHour = "";
     @Override
     public void onStart(){
         rockCake = Inventory.getFirst("Dwarven rock cake");
-
+        startSkillExp = Skills.getExperience(selectedSkill);
+        startTime = System.currentTimeMillis();
+        currentTime = System.currentTimeMillis();
+        removeBlockingEvent(LoginScreen.class);
     }
     @Override
     public int loop() {
+        if(Login.getState()==0) {
+            Log.fine("Login Screen Stopping");
+//            Login.enterCredentials();
+            return -1;
+        }
+
         absPotInterface =  Interfaces.getComponent(PARENT_INDEX, CHILD_INDEX,SUB_INDEX);
         int currentHp = Skills.getCurrentLevel(Skill.HITPOINTS);
-        int currentRange = Skills.getCurrentLevel(Skill.RANGED);
+        int currentRange = Skills.getCurrentLevel(Skill.ATTACK);
+        currentSkillExp = Skills.getExperience(selectedSkill);
         me = Players.getLocal();
+        if(me==null ){
+            return -1;
+        }
         if(startArea.contains(me)){
             Log.info("Back to starting area stopping ");
             return -1;
@@ -65,17 +93,26 @@ public class AFKNMZ extends Script {
             Log.info("empty pot ending");
             return -1;
         }
+        if (currentRange<=Skills.getLevel(Skill.ATTACK)){
 
+            if (Inventory.contains(itemPredicate2)&&currentHp>50){
+                Item rangePot = Inventory.getFirst(itemPredicate2);
+                rangePot.interact("Drink");
+                Time.sleepUntil(()->Skills.getCurrentLevel(Skill.HITPOINTS)==(currentHp-50),300,10000);
+                Time.sleep(300,500);
+                loopCake(currentHp);
+            }
+        }
         if(Inventory.contains(itemPredicate)) {
-            if (absCount <= 300 + Random.nextInt(10, 50)){
+            if (absCount <= 300 + Random.nextInt(10, 200)){
                 Item absPot = Inventory.getFirst(itemPredicate);
 //                int absCount = Inventory.getCount(itemPredicate);
-                while(Inventory.contains(itemPredicate)&&absCount<500+Random.nextInt(10,100)){
+                while(Inventory.contains(itemPredicate)&&absCount<900+Random.nextInt(10,100)){
                     try {
                         absPot = Inventory.getFirst(itemPredicate);
                         absPot.interact("Drink");
                         if(absCount==0)
-                            Time.sleep(1000);
+                            Time.sleep(1000,1500);
                         else
                             Time.sleep(400,800);
                         absPotInterface = Interfaces.getComponent(PARENT_INDEX, CHILD_INDEX, SUB_INDEX);
@@ -88,45 +125,75 @@ public class AFKNMZ extends Script {
                         break;
                     }
                 }
-            }
-        }
-
-        if(currentHp>1){
-            if(currentHp>3){
-                loopCake(currentHp);
-            }
-            if(Random.nextInt(1,99)>50){
                 loopCake(currentHp);
             }
         }
 
-        if (currentRange<=Skills.getLevel(Skill.RANGED)){
-            if (Inventory.contains(itemPredicate2)){
-                Item rangePot = Inventory.getFirst(itemPredicate2);
-                rangePot.interact("Drink");
-                Time.sleep(1000);
+
+        if(currentHp>1&&currentHp<51||(currentHp>1&&!Inventory.contains(itemPredicate2))){
+            if(currentHp>Random.nextInt(5,8)){
+                loopCake(currentHp);
+            }
+            if(Random.nextInt(1,99)>80){
+                loopCake(currentHp);
             }
         }
-        return 60000;
+
+
+        return Random.nextInt(10000,30000);
     }
     @Override
     public void onStop(){
         loopStop=true;
+        Log.fine("Time Elapsed : "+time);
+        Log.fine("Exp Earned : "+ expDiff);
+        Log.fine("EXP per hour : "+expPerHour);
     }
     private void loopCake(int times){
+        if(Combat.getSpecialEnergy()==100){
+            Log.info("using special");
+            Combat.toggleSpecial(true);
+            Time.sleep(600);
+        }
+
         Log.info("Eating hp : "+ Skills.getCurrentLevel(Skill.HITPOINTS));
-        if(times>20)
-            times=20;
+//        if(times>9) {
+//            times = 20;
+//            int amount = (times/10)+1;
+//
+//
+//        }
         for(int i =times;i>1;i--){
+            if(loopStop||Skills.getCurrentLevel(Skill.HITPOINTS)==1||Skills.getCurrentLevel(Skill.HITPOINTS)>=45&&Inventory.contains(itemPredicate2) )
+                break;
             rockCake.interact("Guzzle");
             Time.sleep(1000);
-            if(loopStop||Skills.getCurrentLevel(Skill.HITPOINTS)==1)
-                break;
+
         }
     }
     @Override
     public void onPause(){
         Log.info("testing");
         setStopping(true);
+    }
+
+    @Override
+    public void notify(RenderEvent renderEvent) {
+        Graphics g = renderEvent.getSource();
+        currentTime = System.currentTimeMillis();
+        long durationInMillis=currentTime-startTime;
+        long second = (durationInMillis / 1000) % 60;
+        long minute = (durationInMillis / (1000 * 60)) % 60;
+        long hour = (durationInMillis / (1000 * 60 * 60)) % 24;
+        time = String.format("%02d:%02d:%02d", hour, minute, second);
+        expDiff = Skills.getExperience(selectedSkill)-startSkillExp;
+        double expPerSec= expDiff/(durationInMillis/(1000));
+        expPerHour =String.format("%d", Math.round(expPerSec*60*60));
+        if(durationInMillis>1000&&expPerSec>0) {
+
+            g.drawString("EXP earned : " + expDiff +" ("+expPerHour+")", 20, 230); //x and y are destinations the size of a pixel on the canvas, canvas is 503x765
+            g.drawString("Time elapsed : " + time, 20, 250);
+        }
+
     }
 }

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8ef719ae-bf9e-4e6a-909e-dfe68248b81b" name="Default Changelist" comment="" />
+    <list default="true" id="8ef719ae-bf9e-4e6a-909e-dfe68248b81b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AfkNMZ/AFKNMZ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AfkNMZ/AFKNMZ.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AutoSmelt/AutoSmelt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AutoSmelt/AutoSmelt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestingScript/TestScript.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestingScript/TestScript.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,22 +22,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AutoSmelt/AutoSmelt.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="513">
-              <caret line="117" column="94" selection-start-line="117" selection-start-column="42" selection-end-line="117" selection-end-column="94" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AutoAgility/Task/Climb.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-17">
-              <caret line="71" column="36" selection-start-line="71" selection-start-column="36" selection-end-line="71" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4393#4394#0" expanded="true" />
-                <element signature="e#4482#4483#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="187">
+              <caret line="55" column="48" selection-start-line="55" selection-start-column="48" selection-end-line="55" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -40,13 +31,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/AfkNMZ/AFKNMZ.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="77" column="24" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
+            <state relative-caret-position="-182">
+              <caret line="127" column="36" lean-forward="true" selection-start-line="127" selection-start-column="36" selection-end-line="127" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3909#3910#0" expanded="true" />
-                <element signature="e#3935#3936#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/TestingScript/TestScript.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="39" column="23" lean-forward="true" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -54,10 +52,24 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AutoAgility/AutoAgility.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" selection-start-line="22" selection-end-line="23" />
+            <state relative-caret-position="425">
+              <caret line="70" column="16" selection-start-line="70" selection-start-column="8" selection-end-line="70" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AutoAgility/model/AgiPaint.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="41" column="83" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="83" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3905#3906#0" expanded="true" />
+                <element signature="e#3932#3933#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -66,7 +78,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AutoAgility/Task/Drink.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
+            <state relative-caret-position="374">
               <caret line="32" column="62" selection-start-line="32" selection-start-column="62" selection-end-line="32" selection-end-column="62" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -78,7 +90,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AutoAgility/model/Config.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
+            <state relative-caret-position="391">
               <caret line="33" column="6" selection-start-line="28" selection-start-column="4" selection-end-line="33" selection-end-column="6" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -94,7 +106,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AutoAgility/Task/Heal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
+            <state relative-caret-position="510">
               <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="60" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -106,7 +118,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AutoAgility/Task/Walk.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="564">
+            <state relative-caret-position="697">
               <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -118,7 +130,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AutoAgility/Task/Alch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
+            <state relative-caret-position="697">
               <caret line="53" column="23" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -149,12 +161,15 @@
       <find>ExpE</find>
       <find>agi</find>
       <find>mark</find>
+      <find>currentRange</find>
+      <find>Skill.RANGED</find>
     </findStrings>
     <replaceStrings>
       <replace>GEPARENT</replace>
       <replace>MAGIC</replace>
       <replace>magic</replace>
       <replace>Magic</replace>
+      <replace>Skill.ATTACK</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -166,7 +181,6 @@
         <option value="$PROJECT_DIR$/src/AutoCleanHerb/AutoClean.java" />
         <option value="$PROJECT_DIR$/src/AutoHerbMix/AutoClean.java" />
         <option value="$PROJECT_DIR$/src/AutoHerbMix/AutoHerbMix.java" />
-        <option value="$PROJECT_DIR$/src/AutoSmelt/AutoSmelt.java" />
         <option value="$PROJECT_DIR$/src/AutoAgility/model/subCourse.java" />
         <option value="$PROJECT_DIR$/src/AutoAgility/Constants/Food.java" />
         <option value="$PROJECT_DIR$/src/MagicHighAlch/MagicHighAlch.java" />
@@ -179,20 +193,22 @@
         <option value="$PROJECT_DIR$/src/AutoAgility/Constants/Courses.java" />
         <option value="$PROJECT_DIR$/src/AutoAgility/Constants/SubCourses.java" />
         <option value="$PROJECT_DIR$/src/AutoAgility/Task/Drink.java" />
-        <option value="$PROJECT_DIR$/src/AutoAgility/AutoAgility.java" />
         <option value="$PROJECT_DIR$/src/AutoAgility/Task/Heal.java" />
         <option value="$PROJECT_DIR$/src/AutoAgility/Task/Walk.java" />
         <option value="$PROJECT_DIR$/src/AutoAgility/Task/Alch.java" />
         <option value="$PROJECT_DIR$/src/AutoAgility/Task/Climb.java" />
+        <option value="$PROJECT_DIR$/src/AutoAgility/AutoAgility.java" />
+        <option value="$PROJECT_DIR$/src/AutoSmelt/AutoSmelt.java" />
+        <option value="$PROJECT_DIR$/src/TestingScript/TestScript.java" />
         <option value="$PROJECT_DIR$/src/AfkNMZ/AFKNMZ.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="657" />
-    <option name="y" value="13" />
+    <option name="x" value="472" />
+    <option name="y" value="20" />
     <option name="width" value="1400" />
-    <option name="height" value="997" />
+    <option name="height" value="897" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -221,6 +237,12 @@
               <item name="RsPeerProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="RsPeerProject" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Constants" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RsPeerProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RsPeerProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Task" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -233,19 +255,7 @@
               <item name="RsPeerProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="RsPeerProject" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Constants" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RsPeerProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RsPeerProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RsPeerProject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RsPeerProject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Task" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="RsPeerProject" type="b2602c69:ProjectViewProjectNode" />
@@ -258,6 +268,12 @@
               <item name="RsPeerProject" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="MagicHighAlch" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RsPeerProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RsPeerProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="TestingScript" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -318,10 +334,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="657" y="13" width="1400" height="997" extended-state="0" />
+    <frame x="472" y="20" width="1400" height="897" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25373134" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26119402" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -338,7 +354,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.3298611" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32984293" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -354,13 +370,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
           <caret line="54" column="12" selection-start-line="54" selection-start-column="12" selection-end-line="54" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TestingScript/TestScript.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -525,18 +534,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AutoAgility/model/AgiPaint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="18" column="22" lean-forward="true" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3905#3906#0" expanded="true" />
-            <element signature="e#3932#3933#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AutoAgility/Constants/Courses.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -578,36 +575,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AutoAgility/Task/Walk.java">
+    <entry file="file://$PROJECT_DIR$/src/AIOFight/Task/Heal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="408">
+          <caret line="34" column="13" lean-forward="true" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AutoAgility/Task/Alch.java">
+    <entry file="jar://$USER_HOME$/Documents/RSPeer/cache/rspeer.jar!/org/rspeer/runetek/api/component/tab/Combat.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="53" column="23" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="279">
+          <caret line="41" column="26" selection-start-line="41" selection-start-column="26" selection-end-line="41" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AutoSmelt/AutoSmelt.java">
+    <entry file="file://$PROJECT_DIR$/src/AutoAgility/Task/Climb.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="117" column="94" selection-start-line="117" selection-start-column="42" selection-end-line="117" selection-end-column="94" />
+        <state relative-caret-position="901">
+          <caret line="71" column="36" selection-start-line="71" selection-start-column="36" selection-end-line="71" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4361#4362#0" expanded="true" />
+            <element signature="e#4393#4394#0" expanded="true" />
+            <element signature="e#4440#4441#0" expanded="true" />
+            <element signature="e#4482#4483#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AutoAgility/Task/Drink.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
+        <state relative-caret-position="374">
           <caret line="32" column="62" selection-start-line="32" selection-start-column="62" selection-end-line="32" selection-end-column="62" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -617,7 +615,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AutoAgility/model/Config.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
+        <state relative-caret-position="391">
           <caret line="33" column="6" selection-start-line="28" selection-start-column="4" selection-end-line="33" selection-end-column="6" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -629,16 +627,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AIOFight/Task/Heal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="34" column="13" lean-forward="true" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AutoAgility/Task/Heal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
+        <state relative-caret-position="510">
           <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="60" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -646,36 +637,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AutoAgility/Task/Climb.java">
+    <entry file="file://$PROJECT_DIR$/src/AutoAgility/Task/Walk.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="71" column="36" selection-start-line="71" selection-start-column="36" selection-end-line="71" selection-end-column="36" />
+        <state relative-caret-position="697">
+          <caret line="54" column="13" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4393#4394#0" expanded="true" />
-            <element signature="e#4482#4483#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AutoAgility/Task/Alch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="53" column="23" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AutoSmelt/AutoSmelt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="55" column="48" selection-start-line="55" selection-start-column="48" selection-end-line="55" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AutoAgility/model/AgiPaint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="41" column="83" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="83" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3905#3906#0" expanded="true" />
+            <element signature="e#3932#3933#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AutoAgility/AutoAgility.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" selection-start-line="22" selection-end-line="23" />
+        <state relative-caret-position="425">
+          <caret line="70" column="16" selection-start-line="70" selection-start-column="8" selection-end-line="70" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/TestingScript/TestScript.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="39" column="23" lean-forward="true" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/AfkNMZ/AFKNMZ.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="77" column="24" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
+        <state relative-caret-position="-182">
+          <caret line="127" column="36" lean-forward="true" selection-start-line="127" selection-start-column="36" selection-end-line="127" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3909#3910#0" expanded="true" />
-            <element signature="e#3935#3936#0" expanded="true" />
           </folding>
         </state>
       </provider>

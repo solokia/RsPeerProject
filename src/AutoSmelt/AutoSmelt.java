@@ -34,15 +34,21 @@ public class AutoSmelt extends Script {
     }
     @Override
     public int loop() {
+        me = Players.getLocal();
+        if(me==null)
+            return -1;
         try{
+
             if(Dialog.isOpen()){
                 clicked=false;
             }
-            if(smeltArea.contains(me)&&Inventory.contains(materialName)&&!me.isAnimating()&&!clicked)
+            if(smeltArea.contains(me)&&Inventory.contains(materialName)&&!me.isAnimating())
             {
-                smelt();
+//                Log.info("testcheck");
+                return checkAnimation();
             }
             if (bankArea.contains(me)&&!Inventory.contains(materialName)){
+//                Log.info("testBanking");
                 return bank();
             }
 
@@ -51,9 +57,11 @@ public class AutoSmelt extends Script {
                 Movement.toggleRun(true);
             }
             if(Inventory.contains(materialName)&&!smeltArea.contains(me)){
+//                Log.info("testwalksmelt");
                 walkToSmelt();
             }
             if(!Inventory.contains(materialName)&&!bankArea.contains(me)){
+//                Log.info("testwalkBanking");
                 walkToBank();
             }
 
@@ -64,6 +72,22 @@ public class AutoSmelt extends Script {
 
 
         return 500;
+    }
+    public int checkAnimation(){
+        if(!clicked){
+            smelt();
+        }else {
+            for (int i = 0; i < 20; i++) {
+                if (me.isAnimating()) {
+                    return 300;
+                }
+
+                    Time.sleep(100, 250);
+            }
+            if(Inventory.contains(materialName))
+                smelt();
+        }
+        return 300;
     }
 
     public boolean smelt(){
