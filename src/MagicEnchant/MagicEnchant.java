@@ -19,6 +19,11 @@ import org.rspeer.script.Script;
 import org.rspeer.script.ScriptMeta;
 import org.rspeer.ui.Log;
 
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.TrayIcon.MessageType;
+import java.net.MalformedURLException;
+
 @ScriptMeta(developer = "Solly", desc = "AutoEnchant", name = "AutoEnchant")
 public class MagicEnchant extends Script {
     private Player me;
@@ -53,7 +58,14 @@ public class MagicEnchant extends Script {
         if(!configured)
             return 500;
         try{
+            if(!Inventory.contains("Cosmic rune")) {
+                displayNotification();
+                return -1;
+            }
+
             if(!Inventory.contains(materialName)){
+                if(speed)
+                    Time.sleep(2000,20000);
                 return bank();
             }else
             if (Inventory.contains(materialName)&&!(clicked&&speed))
@@ -61,6 +73,8 @@ public class MagicEnchant extends Script {
             if(Dialog.isOpen()){
                 if(Dialog.canContinue())
                     clicked=false;
+                if(speed)
+                    Time.sleep(2000,20000);
             }
 
         }catch (Exception e){
@@ -70,6 +84,29 @@ public class MagicEnchant extends Script {
 
         return 500;
     }
+    public void displayNotification(){
+        try {
+            SystemTray tray = SystemTray.getSystemTray();
+
+            // If you want to create an icon in the system tray to preview
+//            Image image = Toolkit.getDefaultToolkit().createImage("some-icon.png");
+            //Alternative (if the icon is on the classpath):
+            Image image = Toolkit.getDefaultToolkit().createImage(getClass().getResource("icon.png"));
+
+            TrayIcon trayIcon = new TrayIcon(image, "Java AWT Tray Demo");
+            //Let the system resize the image if needed
+            trayIcon.setImageAutoSize(true);
+            //Set tooltip text for the tray icon
+            trayIcon.setToolTip("System tray icon demo");
+            tray.add(trayIcon);
+
+            // Display info notification:
+            trayIcon.displayMessage("Magic Enchant", "Script ended", MessageType.INFO);
+        }catch(Exception e){
+            Log.severe(e);
+        }
+    }
+
     public static void tempController(Items i,Spells spell,String sp){
         itemName = i.getName();
         materialName = i.getMaterial();
@@ -116,7 +153,7 @@ public class MagicEnchant extends Script {
             Bank.depositAll(itemName);
             Time.sleep(1000,3500);
             if(!Bank.contains(materialName)){
-
+                displayNotification();
                 return -1;
             }
             Bank.withdrawAll(materialName);

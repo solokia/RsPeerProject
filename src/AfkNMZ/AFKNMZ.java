@@ -100,7 +100,8 @@ public class AFKNMZ extends Script implements RenderListener {
                 rangePot.interact("Drink");
                 Time.sleepUntil(()->Skills.getCurrentLevel(Skill.HITPOINTS)==(currentHp-50),300,10000);
                 Time.sleep(300,500);
-                loopCake(currentHp);
+                if(Skills.getLevel(Skill.HITPOINTS)!=currentHp)
+                    loopCake(currentHp);
             }
         }
         if(Inventory.contains(itemPredicate)) {
@@ -134,13 +135,13 @@ public class AFKNMZ extends Script implements RenderListener {
             if(currentHp>Random.nextInt(5,8)){
                 loopCake(currentHp);
             }
-            if(Random.nextInt(1,99)>80){
+            if(Random.nextInt(1,99)>90){
                 loopCake(currentHp);
             }
         }
 
 
-        return Random.nextInt(10000,30000);
+        return Random.nextInt(20000,60000);
     }
     @Override
     public void onStop(){
@@ -150,11 +151,11 @@ public class AFKNMZ extends Script implements RenderListener {
         Log.fine("EXP per hour : "+expPerHour);
     }
     private void loopCake(int times){
-        if(Combat.getSpecialEnergy()==100){
-            Log.info("using special");
-            Combat.toggleSpecial(true);
-            Time.sleep(600);
-        }
+//        if(Combat.getSpecialEnergy()==100){
+//            Log.info("using special");
+//            Combat.toggleSpecial(true);
+//            Time.sleep(600);
+//        }
 
         Log.info("Eating hp : "+ Skills.getCurrentLevel(Skill.HITPOINTS));
 //        if(times>9) {
@@ -167,14 +168,9 @@ public class AFKNMZ extends Script implements RenderListener {
             if(loopStop||Skills.getCurrentLevel(Skill.HITPOINTS)==1||Skills.getCurrentLevel(Skill.HITPOINTS)>=45&&Inventory.contains(itemPredicate2) )
                 break;
             rockCake.interact("Guzzle");
-            Time.sleep(1000);
+            Time.sleep(400,800);
 
         }
-    }
-    @Override
-    public void onPause(){
-        Log.info("testing");
-        setStopping(true);
     }
 
     @Override
