@@ -49,7 +49,7 @@ public class AFKNMZ extends Script implements RenderListener {
     };
     private Area startArea = Area.rectangular(2598, 3121, 2610, 3109);
     private boolean loopStop =false;
-    private Skill selectedSkill = Skill.DEFENCE;
+    private Skill selectedSkill = Skill.ATTACK;
     private int startSkillExp;
     private int currentSkillExp;
     private long startTime;
@@ -83,6 +83,7 @@ public class AFKNMZ extends Script implements RenderListener {
         }
         if(startArea.contains(me)){
             Log.info("Back to starting area stopping ");
+            displayNotification();
             return -1;
         }
         if(absPotInterface.isVisible())
@@ -91,31 +92,33 @@ public class AFKNMZ extends Script implements RenderListener {
             absCount = 0;
         if(!Inventory.contains(itemPredicate)&&!Inventory.contains(itemPredicate2)&&absCount<100){
             Log.info("empty pot ending");
+            displayNotification();
             return -1;
         }
         if (currentRange<=Skills.getLevel(Skill.ATTACK)){
 
             if (Inventory.contains(itemPredicate2)&&currentHp>50){
+                Log.info("Buffing up");
                 Item rangePot = Inventory.getFirst(itemPredicate2);
                 rangePot.interact("Drink");
                 Time.sleepUntil(()->Skills.getCurrentLevel(Skill.HITPOINTS)==(currentHp-50),300,10000);
                 Time.sleep(300,500);
-                if(Skills.getLevel(Skill.HITPOINTS)!=currentHp)
+                if(Skills.getLevel(Skill.HITPOINTS)==currentHp-50&&Skills.getLevel(Skill.HITPOINTS)>1)
                     loopCake(currentHp);
             }
         }
         if(Inventory.contains(itemPredicate)) {
-            if (absCount <= 300 + Random.nextInt(10, 200)){
+            if (absCount <= 300 + Random.nextInt(10, 400)){
                 Item absPot = Inventory.getFirst(itemPredicate);
 //                int absCount = Inventory.getCount(itemPredicate);
-                while(Inventory.contains(itemPredicate)&&absCount<900+Random.nextInt(10,100)){
+                while(Inventory.contains(itemPredicate)&&absCount<800+Random.nextInt(10,100)){
                     try {
                         absPot = Inventory.getFirst(itemPredicate);
                         absPot.interact("Drink");
                         if(absCount==0)
-                            Time.sleep(1000,1500);
+                            Time.sleep(1200,1500);
                         else
-                            Time.sleep(400,800);
+                            Time.sleep(300,800);
                         absPotInterface = Interfaces.getComponent(PARENT_INDEX, CHILD_INDEX, SUB_INDEX);
                         absCount = Integer.parseInt(absPotInterface.getText());
                         Log.info("absorption count "+absCount);
@@ -126,22 +129,23 @@ public class AFKNMZ extends Script implements RenderListener {
                         break;
                     }
                 }
+                Time.sleep(300,500);
                 loopCake(currentHp);
             }
         }
 
 
         if(currentHp>1&&currentHp<51||(currentHp>1&&!Inventory.contains(itemPredicate2))){
-            if(currentHp>Random.nextInt(5,8)){
+            if(currentHp>Random.nextInt(1,4)){
                 loopCake(currentHp);
-            }
-            if(Random.nextInt(1,99)>90){
+            }else
+            if(Random.nextInt(1,99)>95){
                 loopCake(currentHp);
             }
         }
 
 
-        return Random.nextInt(20000,60000);
+        return Random.nextInt(31230,61230);
     }
     @Override
     public void onStop(){
@@ -172,7 +176,28 @@ public class AFKNMZ extends Script implements RenderListener {
 
         }
     }
+    public void displayNotification(){
+        try {
+            SystemTray tray = SystemTray.getSystemTray();
 
+            // If you want to create an icon in the system tray to preview
+//            Image image = Toolkit.getDefaultToolkit().createImage("some-icon.png");
+            //Alternative (if the icon is on the classpath):
+            Image image = Toolkit.getDefaultToolkit().createImage(getClass().getResource("icon.png"));
+
+            TrayIcon trayIcon = new TrayIcon(image, "Java AWT Tray Demo");
+            //Let the system resize the image if needed
+            trayIcon.setImageAutoSize(true);
+            //Set tooltip text for the tray icon
+            trayIcon.setToolTip("System tray icon demo");
+            tray.add(trayIcon);
+
+            // Display info notification:
+            trayIcon.displayMessage("Magic Enchant", "Script ended", TrayIcon.MessageType.INFO);
+        }catch(Exception e){
+            Log.severe(e);
+        }
+    }
     @Override
     public void notify(RenderEvent renderEvent) {
         Graphics g = renderEvent.getSource();

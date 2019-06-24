@@ -5,6 +5,7 @@ import org.rspeer.runetek.adapter.component.Item;
 import org.rspeer.runetek.adapter.scene.Player;
 import org.rspeer.runetek.api.Login;
 import org.rspeer.runetek.api.commons.Time;
+import org.rspeer.runetek.api.component.Dialog;
 import org.rspeer.runetek.api.component.Interfaces;
 import org.rspeer.runetek.api.component.tab.Inventory;
 import org.rspeer.runetek.api.scene.Players;
@@ -64,16 +65,22 @@ public class TestScript extends Script implements LoginResponseListener{
 //        Log.info("properties size "+Login.getProperties().size());
 //        LoginScreen x = new LoginScreen(this);
 
-        Log.info("State1 "+Login.getState());
-        if(Login.getState()==0){
-            LoginScreen ls = new LoginScreen(this);
-            Log.info("Login validate 1 "+ls.validate());
-            ls.process();
-            Time.sleep(10000);
-            Log.info("Login validate 2 "+ls.validate());
-
+//        Log.info("State1 "+Login.getState());
+//        if(Login.getState()==0){
+//            LoginScreen ls = new LoginScreen(this);
+//            Log.info("Login validate 1 "+ls.validate());
+//            ls.process();
+//            Time.sleep(10000);
+//            Log.info("Login validate 2 "+ls.validate());
+//
+//        }
+        Log.info(Dialog.isOpen());
+        Log.info(Dialog.canContinue());
+        if(Dialog.isOpen()){
+            for (InterfaceComponent i : Dialog.getChatOptions()){
+                Log.info(i.getText());
+            }
         }
-
         return 500;
 
 
@@ -81,9 +88,9 @@ public class TestScript extends Script implements LoginResponseListener{
 
     @Override
     public void notify(LoginResponseEvent loginResponseEvent) {
-        Log.info("State "+Login.getState());
-        Log.info("code "+loginResponseEvent.getResponse().getCode());
-
-        setStopping(true);
+//        Log.info("State "+Login.getState());
+//        Log.info("code "+loginResponseEvent.getResponse().getCode());
+//
+//        setStopping(true);
     }
 }
