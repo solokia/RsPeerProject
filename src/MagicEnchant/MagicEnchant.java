@@ -65,7 +65,7 @@ public class MagicEnchant extends Script {
 
             if(!Inventory.contains(materialName)){
                 if(speed)
-                    Time.sleep(2000,20000);
+                    Time.sleep(10000,30000);
                 return bank();
             }else
             if (Inventory.contains(materialName)&&!(clicked&&speed))

@@ -49,7 +49,7 @@ public class AFKNMZ extends Script implements RenderListener {
     };
     private Area startArea = Area.rectangular(2598, 3121, 2610, 3109);
     private boolean loopStop =false;
-    private Skill selectedSkill = Skill.ATTACK;
+    private Skill selectedSkill = Skill.STRENGTH;
     private int startSkillExp;
     private int currentSkillExp;
     private long startTime;
@@ -95,18 +95,7 @@ public class AFKNMZ extends Script implements RenderListener {
             displayNotification();
             return -1;
         }
-        if (currentRange<=Skills.getLevel(Skill.ATTACK)){
 
-            if (Inventory.contains(itemPredicate2)&&currentHp>50){
-                Log.info("Buffing up");
-                Item rangePot = Inventory.getFirst(itemPredicate2);
-                rangePot.interact("Drink");
-                Time.sleepUntil(()->Skills.getCurrentLevel(Skill.HITPOINTS)==(currentHp-50),300,10000);
-                Time.sleep(300,500);
-                if(Skills.getLevel(Skill.HITPOINTS)==currentHp-50&&Skills.getLevel(Skill.HITPOINTS)>1)
-                    loopCake(currentHp);
-            }
-        }
         if(Inventory.contains(itemPredicate)) {
             if (absCount <= 300 + Random.nextInt(10, 400)){
                 Item absPot = Inventory.getFirst(itemPredicate);
@@ -133,19 +122,40 @@ public class AFKNMZ extends Script implements RenderListener {
                 loopCake(currentHp);
             }
         }
+        if (currentRange<=Skills.getLevel(Skill.ATTACK)){
 
+            if (Inventory.contains(itemPredicate2)&&currentHp>50){
+                final int DrinkHp = currentHp-50;
+                Log.info("Buffing up");
+                Item rangePot = Inventory.getFirst(itemPredicate2);
+                rangePot.interact("Drink");
+                Time.sleepUntil(()->Skills.getCurrentLevel(Skill.HITPOINTS)==(DrinkHp),300,10000);
+//                for(int i = 0 ; i<30;i++){
+//                    Time.sleep(300,400);
+//                    if(Skills.getCurrentLevel(Skill.HITPOINTS)==DrinkHp) {
+//                        loopCake(currentHp);
+//                        i=30;
+//                    }
+//                }
+                Time.sleep(300,500);
+                if(Skills.getCurrentLevel(Skill.HITPOINTS)<=DrinkHp+1)
+                    loopCake(currentHp);
+            }
+        }
 
+        currentHp = Skills.getCurrentLevel(Skill.HITPOINTS);
+//        Log.info("currenthp "+ currentHp);
         if(currentHp>1&&currentHp<51||(currentHp>1&&!Inventory.contains(itemPredicate2))){
-            if(currentHp>Random.nextInt(1,4)){
+            if(currentHp>Random.nextInt(6,12)){
                 loopCake(currentHp);
             }else
-            if(Random.nextInt(1,99)>95){
+            if(Random.nextInt(1,99)>97){
                 loopCake(currentHp);
             }
         }
 
 
-        return Random.nextInt(31230,61230);
+        return Random.nextInt(145430,161230);
     }
     @Override
     public void onStop(){
@@ -172,7 +182,7 @@ public class AFKNMZ extends Script implements RenderListener {
             if(loopStop||Skills.getCurrentLevel(Skill.HITPOINTS)==1||Skills.getCurrentLevel(Skill.HITPOINTS)>=45&&Inventory.contains(itemPredicate2) )
                 break;
             rockCake.interact("Guzzle");
-            Time.sleep(400,800);
+            Time.sleep(450,800);
 
         }
     }
